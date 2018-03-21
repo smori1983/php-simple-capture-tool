@@ -1,0 +1,30 @@
+{
+    "require": {
+        "facebook/webdriver": "^1.4",
+        "symfony/console": "^2.8",
+        "symfony/yaml": "^2.8"
+    },
+    "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Momo\\Selenium\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+        }
+    },
+    "config": {
+        "autoloader-suffix": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "platform": {
+            "php": "5.5.8"
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "secure-http": false,
+        "sort-packages": true
+    }
+
+}
