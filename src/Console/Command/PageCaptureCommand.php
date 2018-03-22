@@ -37,9 +37,12 @@ class PageCaptureCommand extends Command
             $this->getApplication()->getConfigPath('config_capture_list.yml')
         ));
 
+        // $capabilities = DesiredCapabilities::phantomjs();
+        $capabilities = DesiredCapabilities::chrome();
+
         $webDriver = RemoteWebDriver::create(
             $seleniumConf['url'],
-            DesiredCapabilities::chrome()
+            $capabilities
         );
 
         $webDriver
@@ -50,13 +53,48 @@ class PageCaptureCommand extends Command
                 $seleniumConf['browser']['height']
             ));
 
+        @mkdir(sprintf('%s/_tmp', $seleniumConf['screenshot_save_directory']));
+
         foreach ($urlList['list'] as $item) {
             $webDriver->get($item['url']);
-            $webDriver->takeScreenshot(sprintf(
-                '%s/%s.png',
-                $seleniumConf['screenshot_save_directory'],
-                $item['name']
-            ));
+
+            $imageHeight = $scrollHeight = $webDriver->executeScript('return document.documentElement.scrollHeight;');
+            $innerHeight = $webDriver->executeScript('return window.innerHeight;');
+
+            $i = 0;
+
+            $shots = [];
+
+            while ($scrollHeight > $innerHeight) {
+                $png = sprintf(
+                    '%s/_tmp/%s.%d.png',
+                    $seleniumConf['screenshot_save_directory'],
+                    $item['name'],
+                    $i
+                );
+
+                $shots[] = $png;
+
+                $webDriver->takeScreenshot($png);
+
+                $scrollHeight = $scrollHeight - $innerHeight;
+
+                $i++;
+
+                $webDriver->executeScript(sprintf('window.scrollTo(0, %d);', $innerHeight * $i));
+            }
+
+            $im = imagecreatetruecolor($seleniumConf['browser']['width'], $imageHeight);
+            imagefill($im, 0, 0, $white = imagecolorallocate($im, 0xFF, 0xFF, 0xFF));
+
+            for ($i = count($shots) - 1; $i >= 0; $i--) {
+                $part = imagecreatefrompng($shots[$i]);
+                imagecopy($im, $part, 0, $innerHeight * $i, 0, 0, $seleniumConf['browser']['width'], $seleniumConf['browser']['height']);
+                imagedestroy($part);
+            }
+
+            imagepng($im, sprintf('%s/%s.png', $seleniumConf['screenshot_save_directory'], $item['name']));
+            imagedestroy($im);
         }
 
         $webDriver->close();
