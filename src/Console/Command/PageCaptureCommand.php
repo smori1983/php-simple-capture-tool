@@ -53,12 +53,15 @@ class PageCaptureCommand extends Command
                 $seleniumConf['browser']['height']
             ));
 
-        @mkdir(sprintf('%s/_tmp', $seleniumConf['screenshot_save_directory']));
+        if (!is_dir($tmpDirectory = sprintf('%s/_tmp', $seleniumConf['screenshot_save_directory']))) {
+            mkdir($tmpDirectory);
+        }
 
         foreach ($urlList['list'] as $item) {
             $webDriver->get($item['url']);
 
             $imageHeight = $scrollHeight = $webDriver->executeScript('return document.documentElement.scrollHeight;');
+            $innerWidth = $webDriver->executeScript('return window.innerWidth;');
             $innerHeight = $webDriver->executeScript('return window.innerHeight;');
 
             $i = 0;
@@ -84,12 +87,12 @@ class PageCaptureCommand extends Command
                 $webDriver->executeScript(sprintf('window.scrollTo(0, %d);', $innerHeight * $i));
             }
 
-            $im = imagecreatetruecolor($seleniumConf['browser']['width'], $imageHeight);
+            $im = imagecreatetruecolor($innerWidth, $imageHeight);
             imagefill($im, 0, 0, $white = imagecolorallocate($im, 0xFF, 0xFF, 0xFF));
 
             for ($i = count($shots) - 1; $i >= 0; $i--) {
                 $part = imagecreatefrompng($shots[$i]);
-                imagecopy($im, $part, 0, $innerHeight * $i, 0, 0, $seleniumConf['browser']['width'], $seleniumConf['browser']['height']);
+                imagecopy($im, $part, 0, $innerHeight * $i, 0, 0, $innerWidth, $innerHeight);
                 imagedestroy($part);
             }
 
