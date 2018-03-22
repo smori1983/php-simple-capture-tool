@@ -1,0 +1,5 @@
+list:
+    - url: http://www.yahoo.co.jp/
+      name: yahoo
+    - url: http://www.google.com/
+      name: google

@@ -7,4 +7,5 @@ require __DIR__ . '/vendor/autoload.php';
 use Momo\Selenium\Console\Application;
 
 $application = new Application();
+$application->setConfigDirectory(__DIR__);
 $application->run();
