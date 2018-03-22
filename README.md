@@ -2,8 +2,8 @@
 
 ## Selenium WebDriver
 
-[Selenium Standalone Server](https://www.seleniumhq.org/download/)
-[ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
+- [Selenium Standalone Server](https://www.seleniumhq.org/download/)
+- [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads)
 
 
 ```
