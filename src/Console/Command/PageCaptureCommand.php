@@ -53,7 +53,7 @@ class PageCaptureCommand extends Command
         foreach ($urlList['list'] as $item) {
             $webDriver->get($item['url']);
             $webDriver->takeScreenshot(sprintf(
-                '%s/name.png',
+                '%s/%s.png',
                 $seleniumConf['screenshot_save_directory'],
                 $item['name']
             ));
