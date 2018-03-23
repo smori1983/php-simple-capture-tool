@@ -13,12 +13,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
-class PageCaptureCommand extends Command
+class CapturePageCommand extends Command
 {
     protected function configure()
     {
         $this
-            ->setName('page:capture')
+            ->setName('capture:page')
             ->setDescription('')
             ->setDefinition([]);
     }

@@ -1,7 +1,7 @@
 <?php
 namespace Momo\Selenium\Console;
 
-use Momo\Selenium\Console\Command\PageCaptureCommand;
+use Momo\Selenium\Console\Command\CapturePageCommand;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application extends ConsoleApplication
@@ -28,7 +28,7 @@ class Application extends ConsoleApplication
     protected function getDefaultCommands()
     {
         $commands = array_merge(parent::getDefaultCommands(), [
-            new PageCaptureCommand(),
+            new CapturePageCommand(),
         ]);
 
         return $commands;
