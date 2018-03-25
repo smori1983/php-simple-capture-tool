@@ -8,10 +8,13 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
+    protected $filesystem = null;
+
     protected function configure()
     {
         $this
@@ -22,6 +25,7 @@ class CapturePageCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        $this->filesystem = new Filesystem();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -50,9 +54,10 @@ class CapturePageCommand extends Command
                 $seleniumConf['browser']['height']
             ));
 
-        if (!is_dir($tmpDirectory = sprintf('%s/_tmp', $seleniumConf['screenshot_save_directory']))) {
-            mkdir($tmpDirectory);
-        }
+        $tmpDirectory = sprintf('%s/_tmp', $seleniumConf['screenshot_save_directory']);
+
+        $this->filesystem->remove($tmpDirectory);
+        $this->filesystem->mkdir($tmpDirectory);
 
         foreach ($urlList['list'] as $item) {
             $webDriver->get($item['url']);
