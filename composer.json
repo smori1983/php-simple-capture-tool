@@ -2,6 +2,7 @@
     "require": {
         "facebook/webdriver": "^1.4",
         "symfony/console": "^2.8",
+        "symfony/filesystem": "^2.8",
         "symfony/yaml": "^2.8"
     },
     "require-dev": {
