@@ -4,6 +4,7 @@ connection_timeout_ms: null
 request_timeout_ms: null
 
 browser:
+    type: chrome
     width: 1200
     height: 500
 
