@@ -1,7 +1,12 @@
 url: http://localhost:4444/wd/hub
 
+connection_timeout_ms: null
+request_timeout_ms: null
+
 browser:
-    width: 1000
+    width: 1200
     height: 500
+
+page_load_timeout: 30
 
 screenshot_save_directory: /path/to/directory

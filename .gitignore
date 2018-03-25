@@ -1,2 +1,4 @@
+/.php_cs.cache
 /config_capture_list.yml
 /config_selenium.yml
+/php-cs-fixer.phar
