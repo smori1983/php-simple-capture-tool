@@ -102,6 +102,6 @@ class CapturePageCommand extends Command
             imagedestroy($im);
         }
 
-        $webDriver->close();
+        $webDriver->quit();
     }
 }
