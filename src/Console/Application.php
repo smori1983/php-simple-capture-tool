@@ -1,4 +1,5 @@
 <?php
+
 namespace Momo\Selenium\Console;
 
 use Momo\Selenium\Console\Command\CapturePageCommand;
