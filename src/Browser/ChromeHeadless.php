@@ -4,8 +4,9 @@ namespace Momo\Selenium\Browser;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use Momo\Selenium\BrowserTask\Screenshot\SelfScroll;
 
-class ChromeHeadless extends Chrome
+class ChromeHeadless implements BrowserInterface
 {
     public function supports($browserType)
     {
@@ -22,5 +23,10 @@ class ChromeHeadless extends Chrome
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $chromeOptions);
 
         return $capabilities;
+    }
+
+    public function getScreenshotTask()
+    {
+        return new SelfScroll();
     }
 }

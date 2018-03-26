@@ -2,8 +2,6 @@
 
 namespace Momo\Selenium\Browser;
 
-use Facebook\WebDriver\WebDriver;
-
 interface BrowserInterface
 {
     /**
@@ -19,8 +17,7 @@ interface BrowserInterface
     public function getCapabilities();
 
     /**
-     * @param Facebook\WebDriver\WebDriver $webDriver
-     * @param string                       $imagePath
+     * @return Momo\Selenium\BrowserTask\ScreenshotInterface;
      */
-    public function takeScreenshot(WebDriver $webDriver, $imagePath);
+    public function getScreenshotTask();
 }

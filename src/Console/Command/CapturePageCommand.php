@@ -73,7 +73,7 @@ class CapturePageCommand extends Command
                     $item['name']
                 );
 
-                $browser->takeScreenshot($webDriver, $imagePath);
+                $browser->getScreenshotTask()->execute($webDriver, $imagePath);
             }
         } finally {
             $webDriver->quit();

@@ -4,7 +4,7 @@ namespace Momo\Selenium\Browser;
 
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\WebDriverBrowserType;
-use Facebook\WebDriver\WebDriver;
+use Momo\Selenium\BrowserTask\Screenshot\OneShot;
 
 class Phantomjs implements BrowserInterface
 {
@@ -18,8 +18,8 @@ class Phantomjs implements BrowserInterface
         return DesiredCapabilities::phantomjs();
     }
 
-    public function takeScreenshot(WebDriver $webDriver, $imagePath)
+    public function getScreenshotTask()
     {
-        $webDriver->takeScreenshot($imagePath);
+        return new OneShot();
     }
 }
