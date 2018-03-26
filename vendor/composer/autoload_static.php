@@ -31,6 +31,10 @@ class ComposerStaticInitABCDEFGHIJKLMNOPQRSTUVWXYZ
         array (
             'Momo\\Selenium\\' => 14,
         ),
+        'L' => 
+        array (
+            'League\\Csv\\' => 11,
+        ),
         'F' => 
         array (
             'Facebook\\WebDriver\\' => 19,
@@ -69,6 +73,10 @@ class ComposerStaticInitABCDEFGHIJKLMNOPQRSTUVWXYZ
         'Momo\\Selenium\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'League\\Csv\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/league/csv/src',
         ),
         'Facebook\\WebDriver\\' => 
         array (

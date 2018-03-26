@@ -3,6 +3,7 @@
         "ext-gd": "*",
         "adlawson/vfs": "^0.12.1",
         "facebook/webdriver": "^1.4",
+        "league/csv": "^8.2",
         "symfony/console": "^2.8",
         "symfony/yaml": "^2.8"
     },

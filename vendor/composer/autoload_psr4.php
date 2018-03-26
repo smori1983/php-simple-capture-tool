@@ -14,5 +14,6 @@ return array(
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Momo\\Selenium\\' => array($baseDir . '/src'),
+    'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
     'Facebook\\WebDriver\\' => array($vendorDir . '/facebook/webdriver/lib'),
 );
