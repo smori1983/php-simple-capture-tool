@@ -18,7 +18,9 @@ class YamlReader implements ListReaderInterface
     {
         $captureList = new CaptureList();
 
-        foreach (Yaml::parse(file_get_contents($filePath)) as $item) {
+        $yaml = Yaml::parse(file_get_contents($filePath));
+
+        foreach ($yaml['list'] as $item) {
             $captureList->addItem(new CaptureItem(
                 $item['name'],
                 $item['url']
