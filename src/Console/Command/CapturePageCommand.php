@@ -5,13 +5,17 @@ namespace Momo\Selenium\Console\Command;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\Selenium\Browser\BrowserResolver;
+use Momo\Selenium\CaptureUtil\CaptureListFactory;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
+    protected $captureListFactory = null;
+
     protected $browserResolver = null;
 
     protected function configure()
@@ -19,11 +23,14 @@ class CapturePageCommand extends Command
         $this
             ->setName('capture:page')
             ->setDescription('')
-            ->setDefinition([]);
+            ->setDefinition([
+                new InputArgument('captureList', InputArgument::REQUIRED, 'URL list file'),
+            ]);
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
+        $this->captureListFactory = new CaptureListFactory();
         $this->browserResolver = new BrowserResolver();
     }
 
@@ -33,9 +40,7 @@ class CapturePageCommand extends Command
             $this->getApplication()->getConfigPath('config_selenium.yml')
         ));
 
-        $urlList = Yaml::parse(file_get_contents(
-            $this->getApplication()->getConfigPath('config_capture_list.yml')
-        ));
+        $captureList = $this->captureListFactory->create($input->getArgument('captureList'));
 
         $browser = $this->browserResolver->resolve($seleniumConf['browser']['type']);
 
@@ -60,13 +65,13 @@ class CapturePageCommand extends Command
             ));
 
         try {
-            foreach ($urlList['list'] as $item) {
-                $webDriver->get($item['url']);
+            foreach ($captureList->getItems() as $item) {
+                $webDriver->get($item->getUrl());
 
                 $imagePath = sprintf(
                     '%s/%s.png',
                     $seleniumConf['screenshot_save_directory'],
-                    $item['name']
+                    $item->getName()
                 );
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
