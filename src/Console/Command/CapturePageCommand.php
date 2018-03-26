@@ -8,14 +8,11 @@ use Momo\Selenium\Browser\BrowserResolver;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
     protected $browserResolver = null;
-
-    protected $filesystem = null;
 
     protected function configure()
     {
@@ -28,7 +25,6 @@ class CapturePageCommand extends Command
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->browserResolver = new BrowserResolver();
-        $this->filesystem = new Filesystem();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
