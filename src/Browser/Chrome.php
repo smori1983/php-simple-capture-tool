@@ -10,7 +10,7 @@ class Chrome implements BrowserInterface
 {
     public function supports($browserType)
     {
-        return WebDriverBrowserType::CHROME === $browserType;
+        return $browserType === WebDriverBrowserType::CHROME;
     }
 
     public function getCapabilities()

@@ -11,7 +11,7 @@ class YamlReader implements ListReaderInterface
 {
     public function supports($format)
     {
-        return 'yml' === $format;
+        return $format === 'yml';
     }
 
     public function read($filePath)

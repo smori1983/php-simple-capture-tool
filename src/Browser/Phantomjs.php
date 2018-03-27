@@ -10,7 +10,7 @@ class Phantomjs implements BrowserInterface
 {
     public function supports($browserType)
     {
-        return WebDriverBrowserType::PHANTOMJS === $browserType;
+        return $browserType === WebDriverBrowserType::PHANTOMJS;
     }
 
     public function getCapabilities()

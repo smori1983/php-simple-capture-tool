@@ -10,7 +10,7 @@ class ChromeHeadless implements BrowserInterface
 {
     public function supports($browserType)
     {
-        return 'chrome-headless' === $browserType;
+        return $browserType === 'chrome-headless';
     }
 
     public function getCapabilities()

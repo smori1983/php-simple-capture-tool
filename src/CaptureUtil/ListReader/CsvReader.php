@@ -16,7 +16,7 @@ class CsvReader implements ListReaderInterface
 
     public function supports($format)
     {
-        return 'csv' === $format;
+        return $format === 'csv';
     }
 
     public function read($filePath)
