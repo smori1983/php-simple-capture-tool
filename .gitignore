@@ -1,4 +1,6 @@
 /.php_cs.cache
+/box.phar
 /config_capture_list.yml
 /config_selenium.yml
 /php-cs-fixer.phar
+/simcap.phar
