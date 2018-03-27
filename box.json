@@ -1,0 +1,28 @@
+{
+    "main": "console",
+    "output": "simcap.phar",
+    "compression": "GZ",
+    "files": [
+        "LICENSE",
+        "vendor/autoload.php"
+    ],
+    "finder": [
+        {
+            "name": "*.php",
+            "in": "src"
+        },
+        {
+            "name": "*.php",
+            "exclude": [
+                "Tests",
+                "Test",
+                "tests",
+                "test",
+                "box.phar"
+            ],
+            "in": "vendor"
+        }
+    ],
+    "chmod": "0755",
+    "stub": true
+}

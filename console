@@ -6,6 +6,12 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Momo\Selenium\Console\Application;
 
+if (($pharArchivePath = Phar::running(false)) !== '') {
+    $configDirectory = dirname($pharArchivePath);
+} else {
+    $configDirectory = __DIR__;
+}
+
 $application = new Application();
-$application->setConfigDirectory(__DIR__);
+$application->setConfigDirectory($configDirectory);
 $application->run();
