@@ -37,7 +37,7 @@ class CapturePageCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $seleniumConf = Yaml::parse(file_get_contents(
-            $this->getApplication()->getConfigPath('config_selenium.yml')
+            $this->getApplication()->getConfigPath('webdriver.yml')
         ));
 
         $captureList = $this->captureListFactory->create($input->getArgument('captureList'));
