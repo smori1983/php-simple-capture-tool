@@ -3,4 +3,5 @@
 /config_capture_list.yml
 /php-cs-fixer.phar
 /simcap.phar
+/vendor
 /webdriver.yml
