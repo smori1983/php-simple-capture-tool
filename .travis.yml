@@ -12,6 +12,8 @@ php:
   - 7.1
   - 7.2
 
+dist: trusty
+
 addons:
   chrome: stable
 
@@ -23,7 +25,7 @@ before_install:
   - wget https://chromedriver.storage.googleapis.com/2.37/chromedriver_linux64.zip --directory-prefix=$HOME/webdriver
   - unzip $HOME/webdriver/chromedriver_linux64.zip -d $HOME/webdriver
   - rm $HOME/webdriver/chromedriver_linux64.zip
-  - $HOME/webdriver/chromedriver
+  - $HOME/webdriver/chromedriver &
   #
   # capture setup
   #
