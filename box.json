@@ -1,6 +1,6 @@
 {
-    "main": "console",
-    "output": "simcap.phar",
+    "main": "bin/simcap",
+    "output": "build/simcap.phar",
     "compression": "GZ",
     "files": [
         "LICENSE",
