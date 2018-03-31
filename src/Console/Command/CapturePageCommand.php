@@ -6,21 +6,17 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\SimpleCaptureTool\Browser\BrowserResolver;
 use Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory;
-use Momo\SimpleCaptureTool\Console\Config\WebDriverConfiguration;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
+use Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
-    /**
-     * @var Symfony\Component\Config\Definition\Processor
-     */
-    protected $processor = null;
+    protected $configReader = null;
 
     protected $captureListFactory = null;
 
@@ -33,29 +29,23 @@ class CapturePageCommand extends Command
             ->setDescription('')
             ->setDefinition([
                 new InputArgument('captureList', InputArgument::REQUIRED, 'URL list file'),
+                new InputOption('config', 'c', InputOption::VALUE_REQUIRED, 'WebDriver config yaml file path', 'webdriver.yml'),
             ]);
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->processor = new Processor();
+        $this->configReader = new WebDriverConfigReader();
         $this->captureListFactory = new CaptureListFactory();
         $this->browserResolver = new BrowserResolver();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $yml = Yaml::parse(file_get_contents(
-            $this->getApplication()->getConfigPath('webdriver.yml')
-        ));
-
         try {
-            $webDriverConf = $this->processor->processConfiguration(
-                new WebDriverConfiguration(),
-                [$yml]
-            );
-        } catch (InvalidConfigurationException $e) {
-            $output->writeln('<error>Error in WebDriver config yaml.</error>');
+            $config = $this->configReader->read($input->getOption('config'));
+        } catch (\Exception $e) {
+            $output->writeln('<error>Error in processing WebDriver config yaml.</error>');
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
             return 1;
@@ -63,26 +53,26 @@ class CapturePageCommand extends Command
 
         $captureList = $this->captureListFactory->create($input->getArgument('captureList'));
 
-        $browser = $this->browserResolver->resolve($webDriverConf['browser']['type']);
+        $browser = $this->browserResolver->resolve($config['browser']['type']);
 
         $webDriver = RemoteWebDriver::create(
-            $webDriverConf['url'],
+            $config['url'],
             $browser->getCapabilities(),
-            $webDriverConf['connection_timeout_ms'],
-            $webDriverConf['request_timeout_ms']
+            $config['connection_timeout_ms'],
+            $config['request_timeout_ms']
         );
 
         $webDriver
             ->manage()
             ->timeouts()
-            ->pageLoadTimeout($webDriverConf['page_load_timeout']);
+            ->pageLoadTimeout($config['page_load_timeout']);
 
         $webDriver
             ->manage()
             ->window()
             ->setSize(new WebDriverDimension(
-                $webDriverConf['browser']['width'],
-                $webDriverConf['browser']['height']
+                $config['browser']['width'],
+                $config['browser']['height']
             ));
 
         try {
@@ -91,7 +81,7 @@ class CapturePageCommand extends Command
 
                 $imagePath = sprintf(
                     '%s/%s.png',
-                    $webDriverConf['screenshot_save_directory'],
+                    $config['screenshot_save_directory'],
                     $item->getName()
                 );
 

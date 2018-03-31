@@ -6,12 +6,5 @@ require __DIR__ . '/vendor/autoload.php';
 
 use Momo\SimpleCaptureTool\Console\Application;
 
-if (extension_loaded('phar') && ($pharArchivePath = Phar::running(false)) !== '') {
-    $configDirectory = dirname($pharArchivePath);
-} else {
-    $configDirectory = __DIR__;
-}
-
 $application = new Application();
-$application->setConfigDirectory($configDirectory);
 $application->run();
