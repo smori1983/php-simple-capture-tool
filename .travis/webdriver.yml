@@ -1,0 +1,30 @@
+#
+# url (localhost):
+# - http://localhost:4444/wd/hub (Selenium Standalone Server)
+# - http://localhost:8910/wd/hub (PhantomJS)
+# - http://localhost:9515 (ChromeDriver)
+#
+# url (from vagrant to host machine):
+# - http://10.0.2.2:4444/wd/hub (Selenium Standalone Server)
+# - http://10.0.2.2:8910/wd/hub (PhantomJS)
+# - http://10.0.2.2:9515 (ChromeDriver)
+#
+url: http://localhost:9515
+
+connection_timeout_ms: 30000
+request_timeout_ms: 30000
+
+browser:
+    #
+    # type:
+    # - chrome
+    # - chrome-headless
+    # - phantomjs
+    #
+    type: chrome-headless
+    width: 1200
+    height: 500
+
+page_load_timeout: 30
+
+screenshot_save_directory: .travis/capture

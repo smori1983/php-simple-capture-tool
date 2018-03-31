@@ -1,0 +1,5 @@
+list:
+    - name: google
+      url: http://www.google.co.jp/
+    - name: github
+      url: https://github.com/
