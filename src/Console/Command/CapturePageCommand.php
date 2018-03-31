@@ -43,7 +43,7 @@ class CapturePageCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
-            $webDriverConf = $this->configReader->read($input->getOption('config'));
+            $config = $this->configReader->read($input->getOption('config'));
         } catch (\Exception $e) {
             $output->writeln('<error>Error in processing WebDriver config yaml.</error>');
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
@@ -53,26 +53,26 @@ class CapturePageCommand extends Command
 
         $captureList = $this->captureListFactory->create($input->getArgument('captureList'));
 
-        $browser = $this->browserResolver->resolve($webDriverConf['browser']['type']);
+        $browser = $this->browserResolver->resolve($config['browser']['type']);
 
         $webDriver = RemoteWebDriver::create(
-            $webDriverConf['url'],
+            $config['url'],
             $browser->getCapabilities(),
-            $webDriverConf['connection_timeout_ms'],
-            $webDriverConf['request_timeout_ms']
+            $config['connection_timeout_ms'],
+            $config['request_timeout_ms']
         );
 
         $webDriver
             ->manage()
             ->timeouts()
-            ->pageLoadTimeout($webDriverConf['page_load_timeout']);
+            ->pageLoadTimeout($config['page_load_timeout']);
 
         $webDriver
             ->manage()
             ->window()
             ->setSize(new WebDriverDimension(
-                $webDriverConf['browser']['width'],
-                $webDriverConf['browser']['height']
+                $config['browser']['width'],
+                $config['browser']['height']
             ));
 
         try {
@@ -81,7 +81,7 @@ class CapturePageCommand extends Command
 
                 $imagePath = sprintf(
                     '%s/%s.png',
-                    $webDriverConf['screenshot_save_directory'],
+                    $config['screenshot_save_directory'],
                     $item->getName()
                 );
 
