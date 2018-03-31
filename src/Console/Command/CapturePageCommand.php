@@ -6,9 +6,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\SimpleCaptureTool\Browser\BrowserResolver;
 use Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory;
-use Momo\SimpleCaptureTool\Console\Config\WebDriverConfiguration;
-use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
-use Symfony\Component\Config\Definition\Processor;
+use Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,10 +16,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
-    /**
-     * @var Symfony\Component\Config\Definition\Processor
-     */
-    protected $processor = null;
+    protected $configReader = null;
 
     protected $captureListFactory = null;
 
@@ -40,29 +35,17 @@ class CapturePageCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
-        $this->processor = new Processor();
+        $this->configReader = new WebDriverConfigReader();
         $this->captureListFactory = new CaptureListFactory();
         $this->browserResolver = new BrowserResolver();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        if (!is_file($configPath = $input->getOption('config'))) {
-            throw new \RuntimeException(sprintf(
-                'WebDriver config yaml not found: %s',
-                $configPath
-            ));
-        }
-
-        $yml = Yaml::parse(file_get_contents($configPath));
-
         try {
-            $webDriverConf = $this->processor->processConfiguration(
-                new WebDriverConfiguration(),
-                [$yml]
-            );
-        } catch (InvalidConfigurationException $e) {
-            $output->writeln('<error>Error in WebDriver config yaml.</error>');
+            $webDriverConf = $this->configReader->read($input->getOption('config'));
+        } catch (\Exception $e) {
+            $output->writeln('<error>Error in processing WebDriver config yaml.</error>');
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
             return 1;
