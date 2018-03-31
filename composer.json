@@ -1,4 +1,8 @@
 {
+    "name": "momo/simple-capture-tool",
+    "description": "Capture tool using WebDriver",
+    "type": "library",
+    "license": "MIT",
     "require": {
         "ext-gd": "*",
         "adlawson/vfs": "^0.12.1",

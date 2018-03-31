@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bde0fd437f99c87fdd24bfc13c7d3a74",
+    "content-hash": "ced17be498ae1c4f813e33fb76f9a436",
     "packages": [
         {
             "name": "adlawson/vfs",
