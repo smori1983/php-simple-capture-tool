@@ -2,7 +2,7 @@
 <?php
 mb_internal_encoding('UTF-8');
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 use Momo\SimpleCaptureTool\Console\Application;
 
