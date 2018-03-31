@@ -55,7 +55,8 @@ class CapturePageCommand extends Command
                 [$yml]
             );
         } catch (InvalidConfigurationException $e) {
-            $output->writeln('<error>Error in webdriver.yml</error>');
+            $output->writeln('<error>Error in WebDriver config yaml.</error>');
+            $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
             return 1;
         }
