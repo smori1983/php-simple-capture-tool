@@ -1,10 +1,10 @@
 <?php
 
-namespace Momo\Selenium\Browser;
+namespace Momo\SimpleCaptureTool\Browser;
 
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\WebDriverBrowserType;
-use Momo\Selenium\BrowserTask\Screenshot\OneShot;
+use Momo\SimpleCaptureTool\BrowserTask\Screenshot\OneShot;
 
 class Phantomjs implements BrowserInterface
 {

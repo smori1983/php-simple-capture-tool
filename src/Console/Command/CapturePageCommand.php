@@ -1,12 +1,12 @@
 <?php
 
-namespace Momo\Selenium\Console\Command;
+namespace Momo\SimpleCaptureTool\Console\Command;
 
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
-use Momo\Selenium\Browser\BrowserResolver;
-use Momo\Selenium\CaptureUtil\CaptureListFactory;
-use Momo\Selenium\Console\Config\WebDriverConfiguration;
+use Momo\SimpleCaptureTool\Browser\BrowserResolver;
+use Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory;
+use Momo\SimpleCaptureTool\Console\Config\WebDriverConfiguration;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Console\Command\Command;

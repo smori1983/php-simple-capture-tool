@@ -1,9 +1,9 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil;
+namespace Momo\SimpleCaptureTool\CaptureUtil;
 
-use Momo\Selenium\CaptureUtil\ListReader\CsvReader;
-use Momo\Selenium\CaptureUtil\ListReader\YamlReader;
+use Momo\SimpleCaptureTool\CaptureUtil\ListReader\CsvReader;
+use Momo\SimpleCaptureTool\CaptureUtil\ListReader\YamlReader;
 
 class ListReaderResolver
 {
@@ -18,7 +18,7 @@ class ListReaderResolver
     /**
      * @param string $format
      *
-     * @return \Momo\Selenium\CaptureUtil\ListReaderInterface
+     * @return \Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface
      * @throw \RuntimeException
      */
     public function resolve($format)

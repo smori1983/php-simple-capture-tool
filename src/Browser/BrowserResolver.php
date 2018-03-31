@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\Browser;
+namespace Momo\SimpleCaptureTool\Browser;
 
 class BrowserResolver
 {
@@ -16,7 +16,7 @@ class BrowserResolver
     /**
      * @param string $browserType
      *
-     * @return \Momo\Selenium\Broswer\BrowserInterface
+     * @return \Momo\SimpleCaptureTool\Broswer\BrowserInterface
      * @throw \RuntimeException
      */
     public function resolve($browserType)

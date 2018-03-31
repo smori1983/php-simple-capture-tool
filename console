@@ -4,7 +4,7 @@ mb_internal_encoding('UTF-8');
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Momo\Selenium\Console\Application;
+use Momo\SimpleCaptureTool\Console\Application;
 
 if (($pharArchivePath = Phar::running(false)) !== '') {
     $configDirectory = dirname($pharArchivePath);

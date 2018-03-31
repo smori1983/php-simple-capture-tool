@@ -1,10 +1,10 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil\ListReader;
+namespace Momo\SimpleCaptureTool\CaptureUtil\ListReader;
 
-use Momo\Selenium\CaptureUtil\CaptureItem;
-use Momo\Selenium\CaptureUtil\CaptureList;
-use Momo\Selenium\CaptureUtil\ListReaderInterface;
+use Momo\SimpleCaptureTool\CaptureUtil\CaptureItem;
+use Momo\SimpleCaptureTool\CaptureUtil\CaptureList;
+use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 use Symfony\Component\Yaml\Yaml;
 
 class YamlReader implements ListReaderInterface

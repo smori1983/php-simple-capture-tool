@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\BrowserTask;
+namespace Momo\SimpleCaptureTool\BrowserTask;
 
 use Facebook\WebDriver\WebDriver;
 

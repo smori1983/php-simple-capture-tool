@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil;
+namespace Momo\SimpleCaptureTool\CaptureUtil;
 
 class CaptureList
 {

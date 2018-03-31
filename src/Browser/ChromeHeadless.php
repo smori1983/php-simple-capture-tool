@@ -1,10 +1,10 @@
 <?php
 
-namespace Momo\Selenium\Browser;
+namespace Momo\SimpleCaptureTool\Browser;
 
 use Facebook\WebDriver\Chrome\ChromeOptions;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
-use Momo\Selenium\BrowserTask\Screenshot\SelfScroll;
+use Momo\SimpleCaptureTool\BrowserTask\Screenshot\SelfScroll;
 
 class ChromeHeadless implements BrowserInterface
 {

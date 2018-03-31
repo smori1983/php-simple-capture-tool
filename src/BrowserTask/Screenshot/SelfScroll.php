@@ -1,9 +1,9 @@
 <?php
 
-namespace Momo\Selenium\BrowserTask\Screenshot;
+namespace Momo\SimpleCaptureTool\BrowserTask\Screenshot;
 
 use Facebook\WebDriver\WebDriver;
-use Momo\Selenium\BrowserTask\ScreenshotInterface;
+use Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
 use Vfs\FileSystem;
 
 class SelfScroll implements ScreenshotInterface

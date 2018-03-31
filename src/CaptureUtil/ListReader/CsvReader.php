@@ -1,11 +1,11 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil\ListReader;
+namespace Momo\SimpleCaptureTool\CaptureUtil\ListReader;
 
 use League\Csv\Reader;
-use Momo\Selenium\CaptureUtil\CaptureItem;
-use Momo\Selenium\CaptureUtil\CaptureList;
-use Momo\Selenium\CaptureUtil\ListReaderInterface;
+use Momo\SimpleCaptureTool\CaptureUtil\CaptureItem;
+use Momo\SimpleCaptureTool\CaptureUtil\CaptureList;
+use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 
 class CsvReader implements ListReaderInterface
 {

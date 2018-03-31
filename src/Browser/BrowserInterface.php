@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\Browser;
+namespace Momo\SimpleCaptureTool\Browser;
 
 interface BrowserInterface
 {
@@ -17,7 +17,7 @@ interface BrowserInterface
     public function getCapabilities();
 
     /**
-     * @return Momo\Selenium\BrowserTask\ScreenshotInterface;
+     * @return Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
      */
     public function getScreenshotTask();
 }

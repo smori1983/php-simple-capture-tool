@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil;
+namespace Momo\SimpleCaptureTool\CaptureUtil;
 
 class CaptureListFactory
 {
@@ -14,7 +14,7 @@ class CaptureListFactory
     /**
      * @param string $filePath
      *
-     * @return Momo\Selenium\CaptureUtil\CaptureList
+     * @return Momo\SimpleCaptureTool\CaptureUtil\CaptureList
      */
     public function create($filePath)
     {

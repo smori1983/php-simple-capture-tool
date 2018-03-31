@@ -1,6 +1,6 @@
 <?php
 
-namespace Momo\Selenium\CaptureUtil;
+namespace Momo\SimpleCaptureTool\CaptureUtil;
 
 interface ListReaderInterface
 {
@@ -14,7 +14,7 @@ interface ListReaderInterface
     /**
      * @param string $filePath
      *
-     * @return Momo\Selenium\CaptureUtil\CaptureList
+     * @return Momo\SimpleCaptureTool\CaptureUtil\CaptureList
      */
     public function read($filePath);
 }

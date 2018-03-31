@@ -1,8 +1,8 @@
 <?php
 
-namespace Momo\Selenium\Console;
+namespace Momo\SimpleCaptureTool\Console;
 
-use Momo\Selenium\Console\Command\CapturePageCommand;
+use Momo\SimpleCaptureTool\Console\Command\CapturePageCommand;
 use Symfony\Component\Console\Application as ConsoleApplication;
 
 class Application extends ConsoleApplication
