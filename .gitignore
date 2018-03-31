@@ -1,6 +1,7 @@
 /.php_cs.cache
 /box.phar
 /capture_list.yml
+/composer.phar
 /php-cs-fixer.phar
 /simcap.phar
 /vendor
