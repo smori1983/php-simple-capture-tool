@@ -40,7 +40,7 @@ Create your `webdriver.yml` from `example/webdriver.yml` .
 
 By default, `webdriver.yml` in current working directory is used.
 
-You can put another file name and/or another path by using `--config` ( `-c` ) option.
+You can put with another file name and/or in another directory by using `--config` ( `-c` ) option.
 
 ### Take screenshot
 
