@@ -11,8 +11,8 @@
 #
 url: http://localhost:4444/wd/hub
 
-connection_timeout_ms: null
-request_timeout_ms: null
+connection_timeout_ms: 30000
+request_timeout_ms: 30000
 
 browser:
     #
