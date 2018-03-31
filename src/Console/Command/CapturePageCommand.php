@@ -12,6 +12,7 @@ use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Yaml\Yaml;
 
@@ -33,6 +34,7 @@ class CapturePageCommand extends Command
             ->setDescription('')
             ->setDefinition([
                 new InputArgument('captureList', InputArgument::REQUIRED, 'URL list file'),
+                new InputOption('config', 'c', InputOption::VALUE_REQUIRED, 'WebDriver config yaml file path', 'webdriver.yml'),
             ]);
     }
 
@@ -45,9 +47,14 @@ class CapturePageCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $yml = Yaml::parse(file_get_contents(
-            $this->getApplication()->getConfigPath('webdriver.yml')
-        ));
+        if (!is_file($configPath = $input->getOption('config'))) {
+            throw new \RuntimeException(sprintf(
+                'WebDriver config yaml not found: %s',
+                $configPath
+            ));
+        }
+
+        $yml = Yaml::parse(file_get_contents($configPath));
 
         try {
             $webDriverConf = $this->processor->processConfiguration(
