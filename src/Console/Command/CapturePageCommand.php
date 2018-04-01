@@ -75,8 +75,8 @@ class CapturePageCommand extends Command
                 $config['browser']['height']
             ));
 
-        try {
-            foreach ($captureList->getItems() as $item) {
+        foreach ($captureList->getItems() as $item) {
+            try {
                 $webDriver->get($item->getUrl());
 
                 $imagePath = sprintf(
@@ -86,9 +86,16 @@ class CapturePageCommand extends Command
                 );
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
+            } catch (\Exception $e) {
+                $output->writeln(sprintf(
+                    'Failed: %s, %s (%s)',
+                    $item->getName(),
+                    $item->getUrl(),
+                    get_class($e)
+                ));
             }
-        } finally {
-            $webDriver->quit();
         }
+
+        $webDriver->quit();
     }
 }
