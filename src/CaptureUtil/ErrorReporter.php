@@ -22,10 +22,19 @@ class ErrorReporter
             return;
         }
 
+        $this->writeHeader($output);
+        $this->writeDetails($output);
+    }
+
+    private function writeHeader(OutputInterface $output)
+    {
         $header = (count($this->errors) > 1) ? 'Failed Items' : 'Failed Item';
 
         $output->writeln(sprintf('%s (name, url, error type):', $header));
+    }
 
+    private function writeDetails(OutputInterface $output)
+    {
         foreach ($this->errors as $error) {
             $output->writeln(sprintf(
                 '%s, %s, %s',
