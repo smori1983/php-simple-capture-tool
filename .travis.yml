@@ -1,0 +1,32 @@
+language: php
+
+sudo: required
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+php:
+  - 5.5
+  - 5.6
+  - 7.1
+  - 7.2
+
+addons:
+  chrome: stable
+
+before_install:
+  - sh .travis/bin/setup_webdriver.sh
+
+install: true
+
+before_script:
+  - composer self-update
+  - composer install
+
+script:
+  - vendor/bin/phpunit
+  - sh build-phar.sh
+  - bin/simcap capture:page -c .travis/webdriver.yml .travis/capture_list.console.yml
+  - php build/simcap.phar capture:page -c .travis/webdriver.yml .travis/capture_list.phar.yml
+  - ls -l .travis/capture
