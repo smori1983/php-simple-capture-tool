@@ -36,3 +36,4 @@ before_script:
 script:
   - vendor/bin/phpunit
   - bin/simcap capture:page -c .travis/webdriver.yml .travis/capture_list.yml
+  - ls -l .travis/capture
