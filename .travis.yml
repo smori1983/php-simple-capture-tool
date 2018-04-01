@@ -26,5 +26,7 @@ before_script:
 
 script:
   - vendor/bin/phpunit
-  - bin/simcap capture:page -c .travis/webdriver.yml .travis/capture_list.yml
+  - sh build-phar.sh
+  - bin/simcap capture:page -c .travis/webdriver.yml .travis/capture_list.console.yml
+  - php build/simcap.phar capture:page -c .travis/webdriver.yml .travis/capture_list.phar.yml
   - ls -l .travis/capture

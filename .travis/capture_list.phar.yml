@@ -1,5 +1,5 @@
 list:
-    - name: google
+    - name: phar.google
       url: http://www.google.co.jp/
-    - name: github
+    - name: phar.github
       url: https://github.com/
