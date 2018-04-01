@@ -22,9 +22,9 @@ class ErrorReporter
             return;
         }
 
-        $title = (count($this->errors) > 1) ? 'Failed Items' : 'Failed Item';
+        $header = (count($this->errors) > 1) ? 'Failed Items' : 'Failed Item';
 
-        $output->writeln(sprintf('%s (name, url, error type):', $title));
+        $output->writeln(sprintf('%s (name, url, error type):', $header));
 
         foreach ($this->errors as $error) {
             $output->writeln(sprintf(
