@@ -6,6 +6,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\SimpleCaptureTool\Browser\BrowserResolver;
 use Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory;
+use Momo\SimpleCaptureTool\CaptureUtil\ErrorReporter;
 use Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,6 +22,8 @@ class CapturePageCommand extends Command
     protected $captureListFactory = null;
 
     protected $browserResolver = null;
+
+    protected $errorReporter = null;
 
     protected function configure()
     {
@@ -38,6 +41,7 @@ class CapturePageCommand extends Command
         $this->configReader = new WebDriverConfigReader();
         $this->captureListFactory = new CaptureListFactory();
         $this->browserResolver = new BrowserResolver();
+        $this->errorReporter = new ErrorReporter();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -75,8 +79,8 @@ class CapturePageCommand extends Command
                 $config['browser']['height']
             ));
 
-        try {
-            foreach ($captureList->getItems() as $item) {
+        foreach ($captureList->getItems() as $item) {
+            try {
                 $webDriver->get($item->getUrl());
 
                 $imagePath = sprintf(
@@ -86,9 +90,13 @@ class CapturePageCommand extends Command
                 );
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
+            } catch (\Exception $e) {
+                $this->errorReporter->add($item, $e);
             }
-        } finally {
-            $webDriver->quit();
         }
+
+        $webDriver->quit();
+
+        $this->errorReporter->report($output);
     }
 }
