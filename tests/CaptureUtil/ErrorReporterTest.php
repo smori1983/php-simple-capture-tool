@@ -2,7 +2,6 @@
 
 namespace Momo\SimpleCaptureTool\CaptureUtil;
 
-use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\BufferedOutput;
 
 class ErrorReporterTest extends \PHPUnit_Framework_TestCase
