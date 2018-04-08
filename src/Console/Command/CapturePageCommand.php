@@ -83,11 +83,7 @@ class CapturePageCommand extends Command
             try {
                 $webDriver->get($item->getUrl());
 
-                $imagePath = sprintf(
-                    '%s/%s.png',
-                    $config['screenshot_save_directory'],
-                    $item->getName()
-                );
+                $imagePath = $this->createImagePath($config, $item->getName());
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
             } catch (\Exception $e) {
@@ -98,5 +94,17 @@ class CapturePageCommand extends Command
         $webDriver->quit();
 
         $this->errorReporter->report($output);
+    }
+
+    protected function createImagePath(array $config, $itemName)
+    {
+        $name = str_replace(DIRECTORY_SEPARATOR, '_', $itemName);
+        $name = preg_replace('/\.{2,}/', '_', $name);
+
+        return sprintf(
+            '%s/%s.png',
+            $config['screenshot_save_directory'],
+            $name
+        );
     }
 }
