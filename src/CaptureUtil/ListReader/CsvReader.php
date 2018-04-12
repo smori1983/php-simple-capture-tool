@@ -10,7 +10,7 @@ use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 class CsvReader implements ListReaderInterface
 {
     protected $acceptableEncodings = [
-        'SJIS-WIN',
+        'SJIS-win',
         'UTF-8',
     ];
 
