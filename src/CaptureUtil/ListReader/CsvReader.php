@@ -23,6 +23,24 @@ class CsvReader implements ListReaderInterface
 
     public function read($filePath)
     {
+        $content = $this->prepareCsvContent($filePath);
+
+        $reader = Reader::createFromString($content);
+
+        $captureList = new CaptureList();
+
+        foreach ($reader->setOffset(1)->fetchAssoc(['name', 'url']) as $item) {
+            $captureList->addItem(new CaptureItem(
+                $item['name'],
+                $item['url']
+            ));
+        }
+
+        return $captureList;
+    }
+
+    private function prepareCsvContent($filePath)
+    {
         $content = file_get_contents($filePath);
 
         $contentEncoding = mb_detect_encoding(
@@ -38,20 +56,7 @@ class CsvReader implements ListReaderInterface
             ));
         }
 
-        $converted = mb_convert_encoding($content, 'UTF-8', $contentEncoding);
-
-        $reader = Reader::createFromString($converted);
-
-        $captureList = new CaptureList();
-
-        foreach ($reader->setOffset(1)->fetchAssoc(['name', 'url']) as $item) {
-            $captureList->addItem(new CaptureItem(
-                $item['name'],
-                $item['url']
-            ));
-        }
-
-        return $captureList;
+        return mb_convert_encoding($content, 'UTF-8', $contentEncoding);
     }
 
     private function acceptableEncodings()
