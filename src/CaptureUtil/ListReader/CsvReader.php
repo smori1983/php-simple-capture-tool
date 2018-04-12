@@ -9,10 +9,11 @@ use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 
 class CsvReader implements ListReaderInterface
 {
-    protected $acceptableEncodings = [
-        'ASCII',
-        'SJIS-win',
-        'UTF-8',
+    protected $encodings = [
+        'ASCII' => true,
+        'EUC-JP' => false,
+        'SJIS-win' => true,
+        'UTF-8' => true,
     ];
 
     public function supports($format)
@@ -24,13 +25,16 @@ class CsvReader implements ListReaderInterface
     {
         $content = file_get_contents($filePath);
 
-        $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings);
+        $contentEncoding = mb_detect_encoding(
+            $content,
+            array_keys($this->encodings)
+        );
 
-        if ($contentEncoding === false) {
+        if (!in_array($contentEncoding, $this->acceptableEncodings(), true)) {
             throw new \RuntimeException(sprintf(
                 'Unknown encoding of file: %s, only %s acceptable',
                 $filePath,
-                implode(',', $this->acceptableEncodings)
+                implode(',', $this->acceptableEncodings())
             ));
         }
 
@@ -48,5 +52,12 @@ class CsvReader implements ListReaderInterface
         }
 
         return $captureList;
+    }
+
+    private function acceptableEncodings()
+    {
+        return array_keys(array_filter($this->encodings, function($value) {
+            return $value === true;
+        }));
     }
 }
