@@ -21,13 +21,9 @@ class CsvReader implements ListReaderInterface
 
     public function read($filePath)
     {
-        $originalDetectOrder = mb_detect_order();
-
-        mb_detect_order($this->acceptableEncodings);
-
         $content = file_get_contents($filePath);
 
-        $contentEncoding = mb_detect_encoding($content);
+        $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings);
 
         if ($contentEncoding === false) {
             throw new \RuntimeException(sprintf(
