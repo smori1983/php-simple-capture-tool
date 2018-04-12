@@ -78,4 +78,4 @@ Yahoo,http://www.yahoo.co.jp/
 Google,http://www.google.co.jp/
 ```
 
-Acceptable encoding: `UTF-8`, `SJIS`
+Acceptable encodings: `ASCII`, `UTF-8`, `SJIS`
