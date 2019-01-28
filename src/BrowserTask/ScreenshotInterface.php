@@ -2,13 +2,13 @@
 
 namespace Momo\SimpleCaptureTool\BrowserTask;
 
-use Facebook\WebDriver\WebDriver;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 
 interface ScreenshotInterface
 {
     /**
-     * @param Facebook\WebDriver\WebDriver $webDriver
-     * @param string                       $imagePath
+     * @param \Facebook\WebDriver\Remote\RemoteWebDriver $webDriver
+     * @param string                                     $imagePath
      */
-    public function execute(WebDriver $webDriver, $imagePath);
+    public function execute(RemoteWebDriver $webDriver, $imagePath);
 }

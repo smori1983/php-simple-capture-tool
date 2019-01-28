@@ -7,6 +7,9 @@ use Momo\SimpleCaptureTool\CaptureUtil\ListReader\YamlReader;
 
 class ListReaderResolver
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface[]
+     */
     protected $readers = [];
 
     public function __construct()

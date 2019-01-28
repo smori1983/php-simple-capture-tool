@@ -8,7 +8,7 @@ use Symfony\Component\Yaml\Yaml;
 class WebDriverConfigReader
 {
     /**
-     * @var Symfony\Component\Config\Definition\Processor
+     * @var \Symfony\Component\Config\Definition\Processor
      */
     protected $processor = null;
 

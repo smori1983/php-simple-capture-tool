@@ -5,6 +5,8 @@ namespace Momo\SimpleCaptureTool\Browser;
 interface BrowserInterface
 {
     /**
+     * Returns whether the implementation is responsible with passed browser type.
+     *
      * @param string $browserType
      *
      * @return bool
@@ -12,12 +14,12 @@ interface BrowserInterface
     public function supports($browserType);
 
     /**
-     * @return Facebook\WebDriver\Remote\DesiredCapabilities
+     * @return \Facebook\WebDriver\WebDriverCapabilities
      */
     public function getCapabilities();
 
     /**
-     * @return Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
+     * @return \Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
      */
     public function getScreenshotTask();
 }
