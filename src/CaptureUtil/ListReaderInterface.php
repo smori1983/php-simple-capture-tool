@@ -14,7 +14,7 @@ interface ListReaderInterface
     /**
      * @param string $filePath
      *
-     * @return Momo\SimpleCaptureTool\CaptureUtil\CaptureList
+     * @return \Momo\SimpleCaptureTool\CaptureUtil\CaptureList
      */
     public function read($filePath);
 }

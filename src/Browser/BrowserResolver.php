@@ -16,7 +16,7 @@ class BrowserResolver
     /**
      * @param string $browserType
      *
-     * @return \Momo\SimpleCaptureTool\Broswer\BrowserInterface
+     * @return \Momo\SimpleCaptureTool\Browser\BrowserInterface
      * @throw \RuntimeException
      */
     public function resolve($browserType)

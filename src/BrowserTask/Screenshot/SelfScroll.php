@@ -2,13 +2,13 @@
 
 namespace Momo\SimpleCaptureTool\BrowserTask\Screenshot;
 
-use Facebook\WebDriver\WebDriver;
+use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
 use Vfs\FileSystem;
 
 class SelfScroll implements ScreenshotInterface
 {
-    public function execute(WebDriver $webDriver, $imagePath)
+    public function execute(RemoteWebDriver $webDriver, $imagePath)
     {
         $protocol = sprintf('screenshot-%s', sha1(microtime()));
 

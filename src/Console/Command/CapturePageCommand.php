@@ -13,16 +13,27 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Yaml\Yaml;
 
 class CapturePageCommand extends Command
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader
+     */
     protected $configReader = null;
 
+    /**
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory
+     */
     protected $captureListFactory = null;
 
+    /**
+     * @var \Momo\SimpleCaptureTool\Browser\BrowserResolver
+     */
     protected $browserResolver = null;
 
+    /**
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorReporter
+     */
     protected $errorReporter = null;
 
     protected function configure()
