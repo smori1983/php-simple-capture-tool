@@ -6,8 +6,14 @@ use Symfony\Component\Console\Output\BufferedOutput;
 
 class ErrorReporterTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorReporter
+     */
     private $SUT = null;
 
+    /**
+     * @var \Symfony\Component\Console\Output\BufferedOutput
+     */
     private $output = null;
 
     public function setUp()

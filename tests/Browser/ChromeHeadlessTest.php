@@ -4,6 +4,9 @@ namespace Momo\SimpleCaptureTool\Browser;
 
 class ChromeHeadlessTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\Browser\ChromeHeadless
+     */
     private $SUT = null;
 
     public function setUp()
@@ -13,6 +16,9 @@ class ChromeHeadlessTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataForSupports
+     *
+     * @param string $browserType
+     * @param bool   $result
      */
     public function testSupports($browserType, $result)
     {

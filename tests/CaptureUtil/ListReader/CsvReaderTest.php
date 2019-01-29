@@ -6,12 +6,24 @@ use Vfs\FileSystem;
 
 class CsvReaderTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ListReader\CsvReader
+     */
     private $SUT = null;
 
+    /**
+     * @var \Vfs\FileSystem
+     */
     private $vfs = null;
 
+    /**
+     * @var string
+     */
     private $vfsProtocol = 'phpunit';
 
+    /**
+     * @var string
+     */
     private $captureListPath = null;
 
     public function setUp()
@@ -33,7 +45,7 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException RuntimeException
+     * @expectedException \RuntimeException
      */
     public function testUnknownFileEncoding()
     {
