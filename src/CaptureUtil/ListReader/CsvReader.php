@@ -16,9 +16,9 @@ class CsvReader implements ListReaderInterface
      */
     protected $encodings = [
         'ASCII' => true,
+        'UTF-8' => true,
         'EUC-JP' => false,
         'SJIS-win' => true,
-        'UTF-8' => true,
     ];
 
     public function supports($format)

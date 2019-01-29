@@ -45,6 +45,41 @@ class CsvReaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @dataProvider dataForReadAcceptableEncodingFile
+     *
+     * @param string $encoding
+     */
+    public function testReadAcceptableFile($encoding)
+    {
+        $content = <<<CSV
+name,url
+サイトFoo,http://foo.example.com/
+サイトBar,http://bar.example.com/
+CSV;
+
+        file_put_contents(
+            $this->captureListPath,
+            mb_convert_encoding($content, $encoding, 'UTF-8')
+        );
+
+        $items = $this->SUT->read($this->captureListPath)->getItems();
+
+        $this->assertSame('サイトFoo', $items[0]->getName());
+        $this->assertSame('http://foo.example.com/', $items[0]->getUrl());
+
+        $this->assertSame('サイトBar', $items[1]->getName());
+        $this->assertSame('http://bar.example.com/', $items[1]->getUrl());
+    }
+
+    public function dataForReadAcceptableEncodingFile()
+    {
+        return [
+            ['SJIS-win'],
+            ['UTF-8'],
+        ];
+    }
+
+    /**
      * @expectedException \RuntimeException
      */
     public function testUnknownFileEncoding()
