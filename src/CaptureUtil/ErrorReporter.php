@@ -38,9 +38,10 @@ class ErrorReporter
      */
     private function writeHeader(OutputInterface $output)
     {
-        $header = (count($this->errors) > 1) ? 'Failed Items' : 'Failed Item';
-
-        $output->writeln(sprintf('%s (name, url, error type):', $header));
+        $output->writeln(sprintf(
+            '%s (name, url, error type):',
+            count($this->errors) > 1 ? 'Failed Items' : 'Failed Item'
+        ));
     }
 
     /**
@@ -59,7 +60,8 @@ class ErrorReporter
      */
     private function writeDetail(OutputInterface $output, ErrorItem $item)
     {
-        $output->writeln(sprintf('%s, %s, %s',
+        $output->writeln(sprintf(
+            '%s, %s, %s',
             $item->getName(),
             $item->getUrl(),
             get_class($item->getException())
