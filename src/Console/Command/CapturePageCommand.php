@@ -6,6 +6,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\SimpleCaptureTool\Browser\BrowserResolver;
 use Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory;
+use Momo\SimpleCaptureTool\CaptureUtil\ErrorItem;
 use Momo\SimpleCaptureTool\CaptureUtil\ErrorReporter;
 use Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader;
 use Symfony\Component\Console\Command\Command;
@@ -98,7 +99,7 @@ class CapturePageCommand extends Command
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
             } catch (\Exception $e) {
-                $this->errorReporter->add($item, $e);
+                $this->errorReporter->add(new ErrorItem($item, $e));
             }
         }
 

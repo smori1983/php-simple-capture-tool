@@ -12,12 +12,11 @@ class ErrorReporter
     private $errors = [];
 
     /**
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem $item
-     * @param \Exception                                      $exception
+     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem $item
      */
-    public function add(CaptureItem $item, \Exception $exception)
+    public function add(ErrorItem $item)
     {
-        $this->errors[] = new ErrorItem($item, $exception);
+        $this->errors[] = $item;
     }
 
     /**

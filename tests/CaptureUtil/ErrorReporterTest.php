@@ -25,7 +25,7 @@ class ErrorReporterTest extends \PHPUnit_Framework_TestCase
 
     public function testOneError()
     {
-        $this->SUT->add(new CaptureItem('site01', 'http://site01.example.com/'), new \Exception());
+        $this->SUT->add(new ErrorItem(new CaptureItem('site01', 'http://site01.example.com/'), new \Exception()));
 
         $this->SUT->report($this->output);
 
@@ -39,8 +39,8 @@ EOL;
 
     public function testTwoErrors()
     {
-        $this->SUT->add(new CaptureItem('site01', 'http://site01.example.com/'), new \Exception());
-        $this->SUT->add(new CaptureItem('site02', 'http://site02.example.com/'), new \Exception());
+        $this->SUT->add(new ErrorItem(new CaptureItem('site01', 'http://site01.example.com/'), new \Exception()));
+        $this->SUT->add(new ErrorItem(new CaptureItem('site02', 'http://site02.example.com/'), new \Exception()));
 
         $this->SUT->report($this->output);
 
