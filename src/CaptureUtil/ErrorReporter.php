@@ -7,20 +7,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ErrorReporter
 {
     /**
-     * @var array
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem[]
      */
     private $errors = [];
 
     /**
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem $item
-     * @param \Exception                                      $exception
+     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem $item
      */
-    public function add(CaptureItem $item, \Exception $exception)
+    public function add(ErrorItem $item)
     {
-        $this->errors[] = [
-            'item' => $item,
-            'exception' => $exception,
-        ];
+        $this->errors[] = $item;
     }
 
     /**
@@ -41,9 +37,10 @@ class ErrorReporter
      */
     private function writeHeader(OutputInterface $output)
     {
-        $header = (count($this->errors) > 1) ? 'Failed Items' : 'Failed Item';
-
-        $output->writeln(sprintf('%s (name, url, error type):', $header));
+        $output->writeln(sprintf(
+            '%s (name, url, error type):',
+            count($this->errors) > 1 ? 'Failed Items' : 'Failed Item'
+        ));
     }
 
     /**
@@ -52,12 +49,21 @@ class ErrorReporter
     private function writeDetails(OutputInterface $output)
     {
         foreach ($this->errors as $error) {
-            $output->writeln(sprintf(
-                '%s, %s, %s',
-                $error['item']->getName(),
-                $error['item']->getUrl(),
-                get_class($error['exception'])
-            ));
+            $this->writeDetail($output, $error);
         }
+    }
+
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem     $item
+     */
+    private function writeDetail(OutputInterface $output, ErrorItem $item)
+    {
+        $output->writeln(sprintf(
+            '%s, %s, %s',
+            $item->getName(),
+            $item->getUrl(),
+            get_class($item->getException())
+        ));
     }
 }
