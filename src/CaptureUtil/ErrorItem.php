@@ -16,7 +16,7 @@ class ErrorItem
 
     /**
      * @param \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem $item
-     * @param \Exception $exception
+     * @param \Exception                                      $exception
      */
     public function __construct(CaptureItem $item, \Exception $exception)
     {
