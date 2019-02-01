@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ErrorReporter
 {
     /**
-     * @var array
+     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem[]
      */
     private $errors = [];
 
@@ -17,10 +17,7 @@ class ErrorReporter
      */
     public function add(CaptureItem $item, \Exception $exception)
     {
-        $this->errors[] = [
-            'item' => $item,
-            'exception' => $exception,
-        ];
+        $this->errors[] = new ErrorItem($item, $exception);
     }
 
     /**
@@ -54,9 +51,9 @@ class ErrorReporter
         foreach ($this->errors as $error) {
             $output->writeln(sprintf(
                 '%s, %s, %s',
-                $error['item']->getName(),
-                $error['item']->getUrl(),
-                get_class($error['exception'])
+                $error->getName(),
+                $error->getUrl(),
+                get_class($error->getException())
             ));
         }
     }
