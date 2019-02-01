@@ -49,12 +49,20 @@ class ErrorReporter
     private function writeDetails(OutputInterface $output)
     {
         foreach ($this->errors as $error) {
-            $output->writeln(sprintf(
-                '%s, %s, %s',
-                $error->getName(),
-                $error->getUrl(),
-                get_class($error->getException())
-            ));
+            $this->writeDetail($output, $error);
         }
+    }
+
+    /**
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem     $item
+     */
+    private function writeDetail(OutputInterface $output, ErrorItem $item)
+    {
+        $output->writeln(sprintf('%s, %s, %s',
+            $item->getName(),
+            $item->getUrl(),
+            get_class($item->getException())
+        ));
     }
 }
