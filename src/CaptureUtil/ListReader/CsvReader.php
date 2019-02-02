@@ -25,17 +25,12 @@ class CsvReader implements ListReaderInterface
 
     public function read($filePath)
     {
-        $content = $this->prepareCsvContent($filePath);
-
-        $reader = Reader::createFromString($content);
-
         $captureList = new CaptureList();
 
+        $reader = Reader::createFromString($this->prepareCsvContent($filePath));
+
         foreach ($reader->setOffset(1)->fetchAssoc(['name', 'url']) as $item) {
-            $captureList->addItem(new CaptureItem(
-                $item['name'],
-                $item['url']
-            ));
+            $captureList->addItem(new CaptureItem($item['name'], $item['url']));
         }
 
         return $captureList;
