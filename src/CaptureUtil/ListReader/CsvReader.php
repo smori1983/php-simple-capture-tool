@@ -38,8 +38,6 @@ class CsvReader implements ListReaderInterface
             ));
         }
 
-        mb_detect_order($originalDetectOrder);
-
         return $captureList;
     }
 
