@@ -9,9 +9,13 @@ use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 
 class CsvReader implements ListReaderInterface
 {
-    protected $acceptableEncodings = [
-        'SJIS-WIN',
+    /**
+     * @var array
+     */
+    protected $encodings = [
+        'ASCII',
         'UTF-8',
+        'SJIS-win',
     ];
 
     public function supports($format)
@@ -21,25 +25,9 @@ class CsvReader implements ListReaderInterface
 
     public function read($filePath)
     {
-        $originalDetectOrder = mb_detect_order();
+        $content = $this->prepareCsvContent($filePath);
 
-        mb_detect_order($this->acceptableEncodings);
-
-        $content = file_get_contents($filePath);
-
-        $contentEncoding = mb_detect_encoding($content);
-
-        if ($contentEncoding === false) {
-            throw new \RuntimeException(sprintf(
-                'Unknown encoding of file: %s, only %s acceptable',
-                $filePath,
-                implode(',', $this->acceptableEncodings)
-            ));
-        }
-
-        $converted = mb_convert_encoding($content, 'UTF-8', $contentEncoding);
-
-        $reader = Reader::createFromString($converted);
+        $reader = Reader::createFromString($content);
 
         $captureList = new CaptureList();
 
@@ -53,5 +41,36 @@ class CsvReader implements ListReaderInterface
         mb_detect_order($originalDetectOrder);
 
         return $captureList;
+    }
+
+    /**
+     * @param string $filePath
+     *
+     * @return string
+     *
+     * @throws \RuntimeException
+     */
+    private function prepareCsvContent($filePath)
+    {
+        $content = file_get_contents($filePath);
+
+        $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings());
+
+        if ($contentEncoding === false) {
+            throw new \RuntimeException(sprintf(
+                'Unknown encoding of file: %s',
+                $filePath
+            ));
+        }
+
+        return mb_convert_encoding($content, 'UTF-8', $contentEncoding);
+    }
+
+    /**
+     * @return string[]
+     */
+    private function acceptableEncodings()
+    {
+        return $this->encodings;
     }
 }

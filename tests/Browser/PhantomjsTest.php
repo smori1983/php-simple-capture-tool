@@ -4,6 +4,9 @@ namespace Momo\SimpleCaptureTool\Browser;
 
 class PhantomjsTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var \Momo\SimpleCaptureTool\Browser\Phantomjs
+     */
     private $SUT = null;
 
     public function setUp()
@@ -13,6 +16,9 @@ class PhantomjsTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider dataForSupports
+     *
+     * @param string $browserType
+     * @param string $result
      */
     public function testSupports($browserType, $result)
     {
