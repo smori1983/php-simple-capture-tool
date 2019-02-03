@@ -32,6 +32,6 @@ class CaptureListFactory
 
         $listReader = $this->resolver->resolve($fileInfo->getExtension());
 
-        return $listReader->read($fileInfo->getPathname());
+        return $listReader->read($fileInfo);
     }
 }
