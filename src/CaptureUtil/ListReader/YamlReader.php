@@ -11,7 +11,7 @@ class YamlReader implements ListReaderInterface
 {
     public function supports($format)
     {
-        return $format === 'yml';
+        return in_array($format, ['yml', 'yaml'], true);
     }
 
     public function read(\SplFileInfo $file)
@@ -19,6 +19,10 @@ class YamlReader implements ListReaderInterface
         $captureList = new CaptureList();
 
         $yaml = Yaml::parse(file_get_contents($file->getPathname()));
+
+        if (!is_array($yaml['list'])) {
+            return $captureList;
+        }
 
         foreach ($yaml['list'] as $item) {
             $captureList->addItem(new CaptureItem($item['name'], $item['url']));
