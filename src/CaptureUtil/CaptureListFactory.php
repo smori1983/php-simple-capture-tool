@@ -4,6 +4,9 @@ namespace Momo\SimpleCaptureTool\CaptureUtil;
 
 class CaptureListFactory
 {
+    /**
+     * @var ListReaderResolver
+     */
     protected $resolver = null;
 
     public function __construct()

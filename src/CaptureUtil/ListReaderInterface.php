@@ -12,9 +12,9 @@ interface ListReaderInterface
     public function supports($format);
 
     /**
-     * @param string $filePath
+     * @param \SplFileInfo $file
      *
      * @return \Momo\SimpleCaptureTool\CaptureUtil\CaptureList
      */
-    public function read($filePath);
+    public function read(\SplFileInfo $file);
 }

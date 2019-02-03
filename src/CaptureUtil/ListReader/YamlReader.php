@@ -14,17 +14,14 @@ class YamlReader implements ListReaderInterface
         return $format === 'yml';
     }
 
-    public function read($filePath)
+    public function read(\SplFileInfo $file)
     {
         $captureList = new CaptureList();
 
-        $yaml = Yaml::parse(file_get_contents($filePath));
+        $yaml = Yaml::parse(file_get_contents($file->getPathname()));
 
         foreach ($yaml['list'] as $item) {
-            $captureList->addItem(new CaptureItem(
-                $item['name'],
-                $item['url']
-            ));
+            $captureList->addItem(new CaptureItem($item['name'], $item['url']));
         }
 
         return $captureList;
