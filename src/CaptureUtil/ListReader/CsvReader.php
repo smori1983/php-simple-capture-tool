@@ -10,9 +10,9 @@ use Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface;
 class CsvReader implements ListReaderInterface
 {
     /**
-     * @var array
+     * @var string[]
      */
-    protected $encodings = [
+    protected $acceptableEncodings = [
         'ASCII',
         'UTF-8',
         'SJIS-win',
@@ -27,6 +27,7 @@ class CsvReader implements ListReaderInterface
     {
         $captureList = new CaptureList();
 
+        /** @var \League\Csv\Reader $reader */
         $reader = Reader::createFromString($this->prepareCsvContent($filePath));
 
         foreach ($reader->setOffset(1)->fetchAssoc(['name', 'url']) as $item) {
@@ -47,7 +48,7 @@ class CsvReader implements ListReaderInterface
     {
         $content = file_get_contents($filePath);
 
-        $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings());
+        $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings);
 
         if ($contentEncoding === false) {
             throw new \RuntimeException(sprintf(
@@ -57,13 +58,5 @@ class CsvReader implements ListReaderInterface
         }
 
         return mb_convert_encoding($content, 'UTF-8', $contentEncoding);
-    }
-
-    /**
-     * @return string[]
-     */
-    private function acceptableEncodings()
-    {
-        return $this->encodings;
     }
 }
