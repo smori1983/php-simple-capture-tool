@@ -62,7 +62,7 @@ CSV;
             mb_convert_encoding($content, $encoding, 'UTF-8')
         );
 
-        $items = $this->SUT->read($this->captureListPath)->getItems();
+        $items = $this->SUT->read(new \SplFileInfo($this->captureListPath))->getItems();
 
         $this->assertSame('サイトFoo', $items[0]->getName());
         $this->assertSame('http://foo.example.com/', $items[0]->getUrl());
@@ -97,6 +97,6 @@ CSV;
             mb_convert_encoding($content, 'EUC-JP')
         );
 
-        $this->SUT->read($this->captureListPath);
+        $this->SUT->read(new \SplFileInfo($this->captureListPath));
     }
 }

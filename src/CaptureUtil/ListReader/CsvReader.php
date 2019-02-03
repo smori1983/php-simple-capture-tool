@@ -23,12 +23,12 @@ class CsvReader implements ListReaderInterface
         return $format === 'csv';
     }
 
-    public function read($filePath)
+    public function read(\SplFileInfo $file)
     {
         $captureList = new CaptureList();
 
         /** @var \League\Csv\Reader $reader */
-        $reader = Reader::createFromString($this->prepareCsvContent($filePath));
+        $reader = Reader::createFromString($this->prepareCsvContent($file));
 
         foreach ($reader->setOffset(1)->fetchAssoc(['name', 'url']) as $item) {
             $captureList->addItem(new CaptureItem($item['name'], $item['url']));
@@ -38,22 +38,22 @@ class CsvReader implements ListReaderInterface
     }
 
     /**
-     * @param string $filePath
+     * @param \SplFileInfo $file
      *
      * @return string
      *
      * @throws \RuntimeException
      */
-    private function prepareCsvContent($filePath)
+    private function prepareCsvContent(\SplFileInfo $file)
     {
-        $content = file_get_contents($filePath);
+        $content = file_get_contents($file->getPathname());
 
         $contentEncoding = mb_detect_encoding($content, $this->acceptableEncodings);
 
         if ($contentEncoding === false) {
             throw new \RuntimeException(sprintf(
                 'Unknown encoding of file: %s',
-                $filePath
+                $file->getPathname()
             ));
         }
 
