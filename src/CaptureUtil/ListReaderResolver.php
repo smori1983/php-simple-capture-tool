@@ -22,7 +22,8 @@ class ListReaderResolver
      * @param string $format
      *
      * @return \Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface
-     * @throw \RuntimeException
+     *
+     * @throws \RuntimeException
      */
     public function resolve($format)
     {
