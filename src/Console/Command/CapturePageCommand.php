@@ -108,6 +108,12 @@ class CapturePageCommand extends Command
         $this->errorReporter->report($output);
     }
 
+    /**
+     * @param array  $config
+     * @param string $itemName
+     *
+     * @return string
+     */
     protected function createImagePath(array $config, $itemName)
     {
         $name = str_replace(DIRECTORY_SEPARATOR, '_', $itemName);
