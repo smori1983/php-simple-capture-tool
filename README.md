@@ -1,5 +1,9 @@
 # simple-capture-tool
 
+
+[![Build Status](https://travis-ci.org/smori1983/php-simple-capture-tool.svg?branch=master)](https://travis-ci.org/smori1983/php-simple-capture-tool)
+
+
 ## Browser automation tools
 
 - [Selenium Standalone Server](https://www.seleniumhq.org/download/)
