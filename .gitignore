@@ -1,9 +1,12 @@
+.DS_Store
+/.idea
 /.php_cs.cache
 /box.phar
 /build
 /capture_list.yml
 /composer.phar
 /php-cs-fixer.phar
+/php-simple-capture-tool.iml
 /simcap.phar
 /vendor
 /webdriver.yml
