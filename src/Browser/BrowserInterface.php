@@ -2,6 +2,9 @@
 
 namespace Momo\SimpleCaptureTool\Browser;
 
+use Facebook\WebDriver\WebDriverCapabilities;
+use Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
+
 interface BrowserInterface
 {
     /**
@@ -14,12 +17,12 @@ interface BrowserInterface
     public function supports($browserType);
 
     /**
-     * @return \Facebook\WebDriver\WebDriverCapabilities
+     * @return WebDriverCapabilities
      */
     public function getCapabilities();
 
     /**
-     * @return \Momo\SimpleCaptureTool\BrowserTask\ScreenshotInterface;
+     * @return ScreenshotInterface;
      */
     public function getScreenshotTask();
 }

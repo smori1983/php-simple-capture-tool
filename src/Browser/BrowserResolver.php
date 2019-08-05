@@ -2,6 +2,8 @@
 
 namespace Momo\SimpleCaptureTool\Browser;
 
+use RuntimeException;
+
 class BrowserResolver
 {
     protected $browsers = [];
@@ -16,9 +18,9 @@ class BrowserResolver
     /**
      * @param string $browserType
      *
-     * @return \Momo\SimpleCaptureTool\Browser\BrowserInterface
+     * @return BrowserInterface
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function resolve($browserType)
     {
@@ -28,7 +30,7 @@ class BrowserResolver
             }
         }
 
-        throw new \RuntimeException(sprintf(
+        throw new RuntimeException(sprintf(
             'Unsupported browser type: %s',
             $browserType
         ));

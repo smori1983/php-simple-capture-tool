@@ -2,6 +2,7 @@
 
 namespace Momo\SimpleCaptureTool\Console\Command;
 
+use Exception;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverDimension;
 use Momo\SimpleCaptureTool\Browser\BrowserResolver;
@@ -18,22 +19,22 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CapturePageCommand extends Command
 {
     /**
-     * @var \Momo\SimpleCaptureTool\Console\Config\WebDriverConfigReader
+     * @var WebDriverConfigReader
      */
     protected $configReader = null;
 
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\CaptureListFactory
+     * @var CaptureListFactory
      */
     protected $captureListFactory = null;
 
     /**
-     * @var \Momo\SimpleCaptureTool\Browser\BrowserResolver
+     * @var BrowserResolver
      */
     protected $browserResolver = null;
 
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorReporter
+     * @var ErrorReporter
      */
     protected $errorReporter = null;
 
@@ -60,7 +61,7 @@ class CapturePageCommand extends Command
     {
         try {
             $config = $this->configReader->read($input->getOption('config'));
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $output->writeln('<error>Error in processing WebDriver config yaml.</error>');
             $output->writeln(sprintf('<error>%s</error>', $e->getMessage()));
 
@@ -98,7 +99,7 @@ class CapturePageCommand extends Command
                 $imagePath = $this->createImagePath($config, $item->getName());
 
                 $browser->getScreenshotTask()->execute($webDriver, $imagePath);
-            } catch (\Exception $e) {
+            } catch (Exception $e) {
                 $this->errorReporter->add(new ErrorItem($item, $e));
             }
         }
@@ -106,6 +107,8 @@ class CapturePageCommand extends Command
         $webDriver->quit();
 
         $this->errorReporter->report($output);
+
+        return 0;
     }
 
     /**

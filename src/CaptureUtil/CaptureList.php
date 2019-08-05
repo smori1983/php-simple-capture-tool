@@ -5,12 +5,12 @@ namespace Momo\SimpleCaptureTool\CaptureUtil;
 class CaptureList
 {
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem[]
+     * @var CaptureItem[]
      */
     protected $items = [];
 
     /**
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem $item
+     * @param CaptureItem $item
      */
     public function addItem(CaptureItem $item)
     {
@@ -18,7 +18,7 @@ class CaptureList
     }
 
     /**
-     * @return \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem[]
+     * @return CaptureItem[]
      */
     public function getItems()
     {

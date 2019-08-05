@@ -7,12 +7,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ErrorReporter
 {
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem[]
+     * @var ErrorItem[]
      */
     private $errors = [];
 
     /**
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem $item
+     * @param ErrorItem $item
      */
     public function add(ErrorItem $item)
     {
@@ -20,7 +20,7 @@ class ErrorReporter
     }
 
     /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param OutputInterface $output
      */
     public function report(OutputInterface $output)
     {
@@ -33,7 +33,7 @@ class ErrorReporter
     }
 
     /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param OutputInterface $output
      */
     private function writeHeader(OutputInterface $output)
     {
@@ -44,7 +44,7 @@ class ErrorReporter
     }
 
     /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     * @param OutputInterface $output
      */
     private function writeDetails(OutputInterface $output)
     {
@@ -54,8 +54,8 @@ class ErrorReporter
     }
 
     /**
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\ErrorItem     $item
+     * @param OutputInterface $output
+     * @param ErrorItem       $item
      */
     private function writeDetail(OutputInterface $output, ErrorItem $item)
     {

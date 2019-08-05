@@ -2,13 +2,14 @@
 
 namespace Momo\SimpleCaptureTool\Console\Config;
 
+use RuntimeException;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
 class WebDriverConfigReader
 {
     /**
-     * @var \Symfony\Component\Config\Definition\Processor
+     * @var Processor
      */
     protected $processor = null;
 
@@ -26,7 +27,7 @@ class WebDriverConfigReader
     public function read($configFilePath)
     {
         if (!is_file($configFilePath)) {
-            throw new \RuntimeException(sprintf(
+            throw new RuntimeException(sprintf(
                 'WebDriver config yaml not found: %s',
                 $configFilePath
             ));

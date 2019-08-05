@@ -2,10 +2,12 @@
 
 namespace Momo\SimpleCaptureTool\CaptureUtil;
 
+use Exception;
+
 class ErrorItem
 {
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem
+     * @var CaptureItem
      */
     private $item;
 
@@ -15,10 +17,10 @@ class ErrorItem
     private $exception;
 
     /**
-     * @param \Momo\SimpleCaptureTool\CaptureUtil\CaptureItem $item
-     * @param \Exception                                      $exception
+     * @param CaptureItem $item
+     * @param Exception   $exception
      */
-    public function __construct(CaptureItem $item, \Exception $exception)
+    public function __construct(CaptureItem $item, Exception $exception)
     {
         $this->item = $item;
         $this->exception = $exception;
@@ -41,7 +43,7 @@ class ErrorItem
     }
 
     /**
-     * @return \Exception
+     * @return Exception
      */
     public function getException()
     {
