@@ -4,11 +4,12 @@ namespace Momo\SimpleCaptureTool\CaptureUtil;
 
 use Momo\SimpleCaptureTool\CaptureUtil\ListReader\CsvReader;
 use Momo\SimpleCaptureTool\CaptureUtil\ListReader\YamlReader;
+use RuntimeException;
 
 class ListReaderResolver
 {
     /**
-     * @var \Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface[]
+     * @var ListReaderInterface[]
      */
     protected $readers = [];
 
@@ -21,9 +22,9 @@ class ListReaderResolver
     /**
      * @param string $format
      *
-     * @return \Momo\SimpleCaptureTool\CaptureUtil\ListReaderInterface
+     * @return ListReaderInterface
      *
-     * @throws \RuntimeException
+     * @throws RuntimeException
      */
     public function resolve($format)
     {
@@ -33,7 +34,7 @@ class ListReaderResolver
             }
         }
 
-        throw new \RuntimeException(sprintf(
+        throw new RuntimeException(sprintf(
             'Unsupported format: %s',
             $format
         ));

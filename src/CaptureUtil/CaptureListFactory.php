@@ -2,6 +2,9 @@
 
 namespace Momo\SimpleCaptureTool\CaptureUtil;
 
+use SplFileInfo;
+use RuntimeException;
+
 class CaptureListFactory
 {
     /**
@@ -17,14 +20,14 @@ class CaptureListFactory
     /**
      * @param string $filePath
      *
-     * @return \Momo\SimpleCaptureTool\CaptureUtil\CaptureList
+     * @return CaptureList
      */
     public function create($filePath)
     {
-        $fileInfo = new \SplFileInfo($filePath);
+        $fileInfo = new SplFileInfo($filePath);
 
         if (!$fileInfo->isFile()) {
-            throw new \RuntimeException(sprintf(
+            throw new RuntimeException(sprintf(
                 'File not found: %s',
                 $filePath
             ));

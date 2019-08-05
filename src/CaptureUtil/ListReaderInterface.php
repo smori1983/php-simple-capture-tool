@@ -2,6 +2,8 @@
 
 namespace Momo\SimpleCaptureTool\CaptureUtil;
 
+use SplFileInfo;
+
 interface ListReaderInterface
 {
     /**
@@ -12,9 +14,9 @@ interface ListReaderInterface
     public function supports($format);
 
     /**
-     * @param \SplFileInfo $file
+     * @param SplFileInfo $file
      *
-     * @return \Momo\SimpleCaptureTool\CaptureUtil\CaptureList
+     * @return CaptureList
      */
-    public function read(\SplFileInfo $file);
+    public function read(SplFileInfo $file);
 }
